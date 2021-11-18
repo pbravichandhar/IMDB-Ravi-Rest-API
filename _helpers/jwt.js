@@ -20,6 +20,6 @@ async function isRevoked(req, payload, done) {
     if (!user) {
         return done(null, true);
     }
-    
-    done({req: {...req, user}});
+    req.userDetails = { ...user.toJSON() };
+    done();
 };

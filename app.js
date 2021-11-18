@@ -16,8 +16,8 @@ app.use(jwt());
 // Initialize DB
 require('./initDB')();
 
-const userRoutes = require('./routes/user.route');
-app.use('/users', userRoutes);
+app.use('/users', require('./routes/user.route'));
+app.use('/movie', require('./routes/movie.route'));
 
 // Common Error handler
 app.use(logError)
