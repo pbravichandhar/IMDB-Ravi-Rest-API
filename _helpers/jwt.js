@@ -9,7 +9,8 @@ function jwt() {
         path: [
             // public routes that don't require authentication
             '/users/login',
-            '/users/register'
+            '/users/register',
+            '/movie/all'
         ]
     });
 }

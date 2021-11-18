@@ -79,8 +79,8 @@ module.exports = {
     });
   }),
 
-  getAllUsers: handleErrorAsync(async (req, res, next) => {
-    const data = await User.find();
+  getAllMovies: handleErrorAsync(async (req, res, next) => {
+    const data = await Movie.find();
     return res.send({
       message: 'Fetched successfully',
       data
