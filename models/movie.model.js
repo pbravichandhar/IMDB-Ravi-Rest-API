@@ -2,14 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const voteSchema = new Schema({
-    _id: Schema.Types.ObjectId,
     votedBy  : Schema.Types.ObjectId,
     isUpVote : Boolean,
-    
 });
 
 const reviewSchema = new Schema({
-    _id: Schema.Types.ObjectId,
     reviewBy  : Schema.Types.ObjectId,
     rating : Number,
     comments : { 

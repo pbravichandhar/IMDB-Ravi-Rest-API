@@ -7,6 +7,7 @@ const { validate } = require('../validators/common.validator')
 
 router.post('/login', loginValidation(), validate, authenticate);
 router.post('/register', registerValidation(), validate, register);
+
 router.get('/all', getAllUsers);
 
 module.exports = router;
