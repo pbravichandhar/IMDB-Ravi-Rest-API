@@ -18,6 +18,15 @@ require('./initDB')();
 
 app.use('/users', require('./routes/user.route'));
 app.use('/movie', require('./routes/movie.route'));
+app.use(function (req, res, next) {
+  res.status(404).send({
+    error: {
+      status: 404,
+      message: 'Route not found'
+    }
+  })
+  return next();;
+});
 
 // Common Error handler
 app.use(logError)

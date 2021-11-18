@@ -22,7 +22,7 @@ returnError = (err, req, res, next) => {
         error: {
             status: err.statusCode || 500,
             // We use condition here because if we have unhandled error we will show simply 'Something Went Wrong'
-            message: err.statusCode ? err.message : 'Something Went Wrong'
+            message: err.statusCode ? err.message : err.message ? err.message : 'Something Went Wrong'
         }
     })
 }
