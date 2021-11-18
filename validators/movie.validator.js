@@ -1,5 +1,5 @@
 const { body, check, sanitizeBody, query, param } = require('express-validator')
-const { genres } = require('../_helpers/constants');
+const { genres, movieSortColumns, pageLimit } = require('../_helpers/constants');
 
 const createMovieValidation = () => {
     return [
@@ -19,12 +19,21 @@ const getMovieByIdValidation = () => {
     ]
 }
 
+const getAllMoviesValidation = () => {
+    return [
+        query('sortBy').optional().isIn(movieSortColumns).withMessage(`must be in following list => ${movieSortColumns}`),
+        query('isAsc').optional().toBoolean(),
+        query('limit').optional().toInt().isIn(pageLimit).withMessage(`must be in following list => ${pageLimit}`),
+        query('page').optional().toInt(),
+    ]
+}
+
 const setFavouriteValidation = () => {
     return [
         sanitizeBody(
             ['genre']
         ).trim(),
-        check('genre').isIn(genres).withMessage(`must be in following list ${genres}`),
+        check('genre').isIn(genres).withMessage(`must be in following list => ${genres}`),
     ]
 }
 
@@ -48,5 +57,6 @@ module.exports = {
     getMovieByIdValidation,
     setFavouriteValidation,
     voteMovieValidation,
-    reviewMovieValidation
+    reviewMovieValidation,
+    getAllMoviesValidation
 }

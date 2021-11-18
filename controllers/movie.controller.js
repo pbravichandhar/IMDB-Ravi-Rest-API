@@ -1,7 +1,6 @@
-const baseError = require('../_helpers/baseError');
-const { authenticate, create } = require('../services/user.service');
 const { createMovie } = require('../services/movie.service');
 let { handleErrorAsync } = require('../_helpers/errorHandler');
+const _ = require('lodash');
 const User = require('../models/user.model')
 const Movie = require('../models/movie.model')
 
@@ -80,10 +79,23 @@ module.exports = {
   }),
 
   getAllMovies: handleErrorAsync(async (req, res, next) => {
-    const data = await Movie.find();
+    const sortBy = req.query.sortBy || 'releaseDate';
+    const sortOrder = req.query.isAsc ? 1 : -1;
+    const page = _.get(req, 'query.page', 1) > 0 ? _.get(req, 'query.page', 1) - 1 : 0;
+    const limit = _.get(req, 'query.limit', 1);
+    const dataSkip = page * limit;
+    const aggregatedData =  await Movie.aggregate([
+      { $sort: { [sortBy]: sortOrder } },
+      {
+          $skip: dataSkip,
+      },
+      {
+          $limit: limit,
+      },
+    ]);
     return res.send({
       message: 'Fetched successfully',
-      data
+      data: aggregatedData
     });
   }),
 };

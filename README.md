@@ -20,7 +20,7 @@ This is the small Rest API with regards to the movies CRUD operation.
 
 The REST API to the example app is described below.
 
-# Deployed in heruko 
+# Deployed in heruko:-
 
 Url:- https://imdb-ravi-movies.herokuapp.com/
 
