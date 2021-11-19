@@ -14,7 +14,8 @@ app.use(cors());
 app.use(jwt());
 
 // Initialize DB
-require('./initDB')();
+// Commented for the JEST Test
+// require('./initDB')();
 
 app.use('/users', require('./routes/user.route'));
 app.use('/movie', require('./routes/movie.route'));
@@ -34,6 +35,9 @@ app.use(returnError)
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(`IMDB Server running @Port - ${PORT}...`);
-});
+// Commented for the JEST Test
+// app.listen(PORT, () => {
+//   console.log(`IMDB Server running @Port - ${PORT}...`);
+// });
+
+module.exports = app;
